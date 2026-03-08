@@ -8,17 +8,21 @@ const currentTheme = localStorage.getItem('theme') || 'light';
 document.documentElement.setAttribute('data-theme', currentTheme);
 updateThemeIcon(currentTheme);
 
-themeToggle.addEventListener('click', () => {
-    let theme = document.documentElement.getAttribute('data-theme');
-    let newTheme = theme === 'light' ? 'dark' : 'light';
-    
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
-});
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        let theme = document.documentElement.getAttribute('data-theme');
+        let newTheme = theme === 'light' ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    });
+}
 
 function updateThemeIcon(theme) {
-    themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+    if (themeToggle) {
+        themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+    }
 }
 
 generateBtn.addEventListener('click', generateLottoNumbers);

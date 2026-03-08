@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotto Number Generator</title>
+    <title>Lotto Generator - Your Professional Lucky Number Tool</title>
+    <meta name="description" content="Generate professional lotto numbers with our high-quality tool. Simple, fast, and secure lotto number generation for your next game.">
     <meta name="google-adsense-account" content="ca-pub-4993958799667836">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4993958799667836"
      crossorigin="anonymous"></script>
@@ -14,30 +15,88 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">🌙</button>
-    <div class="container">
-        <h1>Lotto Number Generator</h1>
-        <div class="card">
-            <div id="numbers-container" class="numbers-container"></div>
-            <button id="generate-btn" class="generate-btn">Generate Numbers</button>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">LottoGen</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#how-to">How it Works</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button id="theme-toggle" class="theme-toggle-inline" aria-label="Toggle Dark/Light Mode">🌙</button>
         </div>
+    </nav>
 
-        <div class="card partnership-card">
-            <h2>Partnership Inquiry</h2>
-            <form action="https://formspree.io/f/mnjgngvk" method="POST" class="contact-form">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required>
+    <div class="container main-content">
+        <header class="hero-section">
+            <h1>Lotto Number Generator</h1>
+            <p class="hero-subtitle">Experience the most advanced and intuitive lucky number generator.</p>
+        </header>
+
+        <section class="generator-section">
+            <div class="card">
+                <div id="numbers-container" class="numbers-container"></div>
+                <button id="generate-btn" class="generate-btn">Generate My Numbers</button>
+            </div>
+        </section>
+
+        <section id="about" class="info-section">
+            <div class="card info-card">
+                <h2>About LottoGen</h2>
+                <p>LottoGen is a premium digital tool designed to help users generate random, unbiased lottery numbers. Our algorithm ensures equal probability for every number, providing a truly random experience for your favorite lottery games.</p>
+            </div>
+        </section>
+
+        <section id="how-to" class="info-section">
+            <div class="card info-card">
+                <h2>How to Use</h2>
+                <div class="steps-grid">
+                    <div class="step">
+                        <span class="step-num">1</span>
+                        <p>Click the "Generate My Numbers" button.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">2</span>
+                        <p>Watch our algorithm select 6 unique numbers.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">3</span>
+                        <p>Use these lucky numbers for your next ticket!</p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <textarea name="message" placeholder="How can we collaborate?" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Send Proposal</button>
-            </form>
-        </div>
+            </div>
+        </section>
+
+        <section id="contact" class="partnership-section">
+            <div class="card partnership-card">
+                <h2>Partnership & Inquiry</h2>
+                <p>Interested in collaborating or have a question? Send us a message below.</p>
+                <form action="https://formspree.io/f/mnjgngvk" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required title="Please enter your name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required title="Please enter a valid email address">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="How can we collaborate?" required title="Please enter your message"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Proposal</button>
+                </form>
+            </div>
+        </section>
     </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2026 LottoGen. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
     <script src="main.js"></script>
 </body>
 </html>
