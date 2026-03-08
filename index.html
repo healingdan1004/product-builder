@@ -33,35 +33,37 @@
             <p class="hero-subtitle">Experience the most advanced and intuitive lucky number generator.</p>
         </header>
 
-        <section class="generator-section">
-            <div class="card">
-                <div id="numbers-container" class="numbers-container"></div>
-                <button id="generate-btn" class="generate-btn">Generate My Numbers</button>
-            </div>
-        </section>
+        <div class="interactive-wrapper">
+            <section class="generator-section">
+                <div class="card">
+                    <h3>Lucky Numbers</h3>
+                    <div id="numbers-container" class="numbers-container"></div>
+                    <button id="generate-btn" class="generate-btn">Generate My Numbers</button>
+                </div>
+            </section>
 
-        <section id="game" class="game-section">
-            <div class="card game-card">
-                <h2>Mini Game: Lotto 2048 Puzzle</h2>
-                <p>Merge the lucky balls to reach the highest number! A perfect snack game while you wait.</p>
-                <div id="game-container" class="game-container">
-                    <canvas id="gameCanvas" width="400" height="400"></canvas>
-                    <div id="game-overlay" class="game-overlay">
-                        <div id="game-start-screen">
-                            <button id="start-game-btn" class="generate-btn">Start 2048</button>
-                        </div>
-                        <div id="game-over-screen" class="hidden">
-                            <h3>Game Over!</h3>
-                            <p>Best Score: <span id="final-score">0</span></p>
-                            <button id="restart-game-btn" class="generate-btn">Try Again</button>
+            <section id="game" class="game-section">
+                <div class="card game-card">
+                    <h3>Lotto 2048 Puzzle</h3>
+                    <div id="game-container" class="game-container">
+                        <canvas id="gameCanvas" width="400" height="400"></canvas>
+                        <div id="game-overlay" class="game-overlay">
+                            <div id="game-start-screen">
+                                <button id="start-game-btn" class="generate-btn">Start 2048</button>
+                            </div>
+                            <div id="game-over-screen" class="hidden">
+                                <h3>Game Over!</h3>
+                                <p>Best Score: <span id="final-score">0</span></p>
+                                <button id="restart-game-btn" class="generate-btn">Try Again</button>
+                            </div>
                         </div>
                     </div>
+                    <div class="game-controls">
+                        <p>Use <strong>Arrows</strong> or <strong>Swipe</strong> to merge.</p>
+                    </div>
                 </div>
-                <div class="game-controls">
-                    <p>Use <strong>Arrow Keys</strong> or <strong>Swipe</strong> to merge the balls.</p>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
         <section id="about" class="info-section">
             <div class="card info-card">
