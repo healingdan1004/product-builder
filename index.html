@@ -40,6 +40,29 @@
             </div>
         </section>
 
+        <section id="game" class="game-section">
+            <div class="card game-card">
+                <h2>Mini Game: Dodge the Falling Objects!</h2>
+                <p>Take a break and test your reflexes while waiting for your lucky numbers.</p>
+                <div id="game-container" class="game-container">
+                    <canvas id="gameCanvas" width="400" height="400"></canvas>
+                    <div id="game-overlay" class="game-overlay">
+                        <div id="game-start-screen">
+                            <button id="start-game-btn" class="generate-btn">Start Game</button>
+                        </div>
+                        <div id="game-over-screen" class="hidden">
+                            <h3>Game Over!</h3>
+                            <p>Score: <span id="final-score">0</span></p>
+                            <button id="restart-game-btn" class="generate-btn">Play Again</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-controls">
+                    <p>Use <strong>Left/Right Arrows</strong> or <strong>Touch</strong> to move.</p>
+                </div>
+            </div>
+        </section>
+
         <section id="about" class="info-section">
             <div class="card info-card">
                 <h2>About LottoGen</h2>
@@ -98,6 +121,7 @@
     </footer>
 
     <script src="main.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>
  
