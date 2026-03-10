@@ -61,44 +61,45 @@ function displayNumbers(numbers) {
 // Initial generation
 generateLottoNumbers();
 
-// Weather Logic (Robust and Reliable)
+/**
+ * Weather Logic (Using OpenWeatherMap for high stability)
+ * Note: For production, API keys should be handled via backend to prevent exposure.
+ */
 async function updateWeather() {
     const weatherInfo = document.getElementById('weather-info');
     if (!weatherInfo) return;
 
+    const API_KEY = 'd74348809d216a763a278b03ac5d1554';
+    
     try {
-        // Set a timeout of 8 seconds to prevent hanging on "Loading..."
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 8000);
+        // Step 1: Get approximate location via IP (Privacy-friendly, no popup)
+        const locResponse = await fetch('https://ipapi.co/json/');
+        const locData = await locResponse.json();
+        const city = locData.city || 'Seoul';
 
-        const response = await fetch('https://wttr.in/?format=j1', {
-            signal: controller.signal,
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
+        // Step 2: Get weather data from OpenWeatherMap
+        const weatherResponse = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+        );
         
-        clearTimeout(timeoutId);
-
-        if (!response.ok) {
-            throw new Error(`Weather service error: ${response.status}`);
+        if (!weatherResponse.ok) {
+            throw new Error(`Weather service responded with ${weatherResponse.status}`);
         }
 
-        const data = await response.json();
+        const data = await weatherResponse.json();
         
-        // Robust extraction with optional chaining and fallbacks
-        const current = data?.current_condition?.[0];
-        const area = data?.nearest_area?.[0];
-        const city = area?.areaName?.[0]?.value || 'Location';
-        const temp = current?.temp_C || '--';
-        const desc = current?.weatherDesc?.[0]?.value || '';
+        // Data extraction
+        const temp = Math.round(data.main.temp);
+        const desc = data.weather[0].main; // e.g., 'Clouds', 'Rain', 'Clear'
+        const cityName = data.name;
 
-        weatherInfo.textContent = `${city}: ${temp}°C${desc ? `, ${desc}` : ''}`;
+        weatherInfo.textContent = `${cityName}: ${temp}°C, ${desc}`;
     } catch (error) {
-        console.error('Weather fetch error:', error);
+        console.error('Weather update failed:', error);
+        // Fallback to a simpler service or error message
         weatherInfo.textContent = 'Weather info unavailable';
     }
 }
 
-// Call updateWeather after initial DOM setup
+// Initialize weather update
 updateWeather();
