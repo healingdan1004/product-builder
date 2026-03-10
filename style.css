@@ -63,6 +63,24 @@ body {
     gap: 1.5rem;
 }
 
+@media (max-width: 600px) {
+    .nav-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .weather-info {
+        font-size: 0.75rem;
+        padding: 2px 8px;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+    }
+}
+
 .weather-info {
     font-size: 0.9rem;
     color: var(--secondary-text-color);
