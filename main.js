@@ -1,10 +1,15 @@
-
 const generateBtn = document.getElementById('generate-btn');
 const numbersContainer = document.getElementById('numbers-container');
 const themeToggle = document.getElementById('theme-toggle');
 
-// Theme Toggle Logic
-const currentTheme = localStorage.getItem('theme') || 'light';
+// Theme Toggle Logic with Safe LocalStorage Access
+let currentTheme = 'light';
+try {
+    currentTheme = localStorage.getItem('theme') || 'light';
+} catch (e) {
+    console.warn('LocalStorage access denied, defaulting to light theme');
+}
+
 document.documentElement.setAttribute('data-theme', currentTheme);
 updateThemeIcon(currentTheme);
 
@@ -14,7 +19,9 @@ if (themeToggle) {
         let newTheme = theme === 'light' ? 'dark' : 'light';
         
         document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
+        try {
+            localStorage.setItem('theme', newTheme);
+        } catch (e) {}
         updateThemeIcon(newTheme);
     });
 }
@@ -25,7 +32,9 @@ function updateThemeIcon(theme) {
     }
 }
 
-generateBtn.addEventListener('click', generateLottoNumbers);
+if (generateBtn) {
+    generateBtn.addEventListener('click', generateLottoNumbers);
+}
 
 function generateLottoNumbers() {
     const numbers = new Set();
@@ -39,6 +48,7 @@ function generateLottoNumbers() {
 }
 
 function displayNumbers(numbers) {
+    if (!numbersContainer) return;
     numbersContainer.innerHTML = '';
     numbers.forEach((number, index) => {
         const ball = document.createElement('div');
@@ -51,24 +61,44 @@ function displayNumbers(numbers) {
 // Initial generation
 generateLottoNumbers();
 
-// Weather Logic (API key-less)
+// Weather Logic (Robust and Reliable)
 async function updateWeather() {
     const weatherInfo = document.getElementById('weather-info');
+    if (!weatherInfo) return;
+
     try {
-        // wttr.in with j1 format returns location and weather in JSON
-        const response = await fetch('https://wttr.in/?format=j1');
+        // Set a timeout of 8 seconds to prevent hanging on "Loading..."
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+        const response = await fetch('https://wttr.in/?format=j1', {
+            signal: controller.signal,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+            throw new Error(`Weather service error: ${response.status}`);
+        }
+
         const data = await response.json();
         
-        const current = data.current_condition[0];
-        const city = data.nearest_area[0].areaName[0].value;
-        const temp = current.temp_C;
-        const desc = current.weatherDesc[0].value;
+        // Robust extraction with optional chaining and fallbacks
+        const current = data?.current_condition?.[0];
+        const area = data?.nearest_area?.[0];
+        const city = area?.areaName?.[0]?.value || 'Location';
+        const temp = current?.temp_C || '--';
+        const desc = current?.weatherDesc?.[0]?.value || '';
 
-        weatherInfo.textContent = `${city}: ${temp}°C, ${desc}`;
+        weatherInfo.textContent = `${city}: ${temp}°C${desc ? `, ${desc}` : ''}`;
     } catch (error) {
-        weatherInfo.textContent = 'Weather info unavailable';
         console.error('Weather fetch error:', error);
+        weatherInfo.textContent = 'Weather info unavailable';
     }
 }
 
+// Call updateWeather after initial DOM setup
 updateWeather();
