@@ -62,20 +62,31 @@ function displayNumbers(numbers) {
 generateLottoNumbers();
 
 /**
- * Weather Logic (Using OpenWeatherMap for high stability)
- * Note: For production, API keys should be handled via backend to prevent exposure.
+ * Weather Logic (Highly Robust Version)
  */
 async function updateWeather() {
     const weatherInfo = document.getElementById('weather-info');
     if (!weatherInfo) return;
 
     const API_KEY = 'd74348809d216a763a278b03ac5d1554';
-    
+    let city = 'Seoul'; // Default fallback
+
     try {
-        // Step 1: Get approximate location via IP (Privacy-friendly, no popup)
-        const locResponse = await fetch('https://ipapi.co/json/');
-        const locData = await locResponse.json();
-        const city = locData.city || 'Seoul';
+        // Step 1: Attempt to get location via IP with a short timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+        try {
+            const locResponse = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+            if (locResponse.ok) {
+                const locData = await locResponse.json();
+                if (locData.city) city = locData.city;
+            }
+        } catch (e) {
+            console.warn('Location fetch failed or timed out, using default city.');
+        } finally {
+            clearTimeout(timeoutId);
+        }
 
         // Step 2: Get weather data from OpenWeatherMap
         const weatherResponse = await fetch(
@@ -83,23 +94,36 @@ async function updateWeather() {
         );
         
         if (!weatherResponse.ok) {
-            throw new Error(`Weather service responded with ${weatherResponse.status}`);
+            // If the city from IP is invalid, try one more time with default Seoul
+            if (city !== 'Seoul') {
+                const retryResponse = await fetch(
+                    `https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=${API_KEY}&units=metric`
+                );
+                if (retryResponse.ok) {
+                    const retryData = await retryResponse.json();
+                    displayWeatherData(retryData, weatherInfo);
+                    return;
+                }
+            }
+            throw new Error(`Weather service error: ${weatherResponse.status}`);
         }
 
         const data = await weatherResponse.json();
-        
-        // Data extraction
-        const temp = Math.round(data.main.temp);
-        const desc = data.weather[0].main; // e.g., 'Clouds', 'Rain', 'Clear'
-        const cityName = data.name;
+        displayWeatherData(data, weatherInfo);
 
-        weatherInfo.textContent = `${cityName}: ${temp}°C, ${desc}`;
     } catch (error) {
         console.error('Weather update failed:', error);
-        // Fallback to a simpler service or error message
         weatherInfo.textContent = 'Weather info unavailable';
     }
 }
 
-// Initialize weather update
-updateWeather();
+function displayWeatherData(data, element) {
+    if (!data || !data.main || !data.weather) return;
+    const temp = Math.round(data.main.temp);
+    const desc = data.weather[0].main;
+    const cityName = data.name;
+    element.textContent = `${cityName}: ${temp}°C, ${desc}`;
+}
+
+// Initialize weather update after a short delay to ensure DOM stability
+setTimeout(updateWeather, 500);
