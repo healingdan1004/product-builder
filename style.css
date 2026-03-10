@@ -63,6 +63,12 @@ body {
     gap: 1.5rem;
 }
 
+.info-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 @media (max-width: 600px) {
     .nav-left {
         flex-direction: column;
@@ -70,7 +76,12 @@ body {
         gap: 4px;
     }
 
-    .weather-info {
+    .info-group {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .weather-info, .food-info {
         font-size: 0.75rem;
         padding: 2px 8px;
     }
@@ -81,17 +92,28 @@ body {
     }
 }
 
-.weather-info {
+.weather-info, .food-info {
     font-size: 0.9rem;
     color: var(--secondary-text-color);
     background: rgba(0,0,0,0.05);
     padding: 4px 12px;
     border-radius: 20px;
     font-weight: 500;
+    white-space: nowrap;
+}
+
+.food-info {
+    color: var(--button-bg-color);
+    background: rgba(9, 132, 227, 0.1);
 }
 
 [data-theme="dark"] .weather-info {
     background: rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .food-info {
+    background: rgba(233, 69, 96, 0.1);
+    color: var(--primary-text-color);
 }
 
 .nav-logo {

@@ -62,17 +62,17 @@ function displayNumbers(numbers) {
 generateLottoNumbers();
 
 /**
- * Weather Logic (Highly Robust Version)
+ * Weather & Food Recommendation Logic
  */
 async function updateWeather() {
     const weatherInfo = document.getElementById('weather-info');
+    const foodInfo = document.getElementById('food-recommendation');
     if (!weatherInfo) return;
 
     const API_KEY = 'd74348809d216a763a278b03ac5d1554';
-    let city = 'Seoul'; // Default fallback
+    let city = 'Seoul';
 
     try {
-        // Step 1: Attempt to get location via IP with a short timeout
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 3000);
 
@@ -83,33 +83,21 @@ async function updateWeather() {
                 if (locData.city) city = locData.city;
             }
         } catch (e) {
-            console.warn('Location fetch failed or timed out, using default city.');
+            console.warn('Location fetch failed, using default.');
         } finally {
             clearTimeout(timeoutId);
         }
 
-        // Step 2: Get weather data from OpenWeatherMap
         const weatherResponse = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
         );
         
         if (!weatherResponse.ok) {
-            // If the city from IP is invalid, try one more time with default Seoul
-            if (city !== 'Seoul') {
-                const retryResponse = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=${API_KEY}&units=metric`
-                );
-                if (retryResponse.ok) {
-                    const retryData = await retryResponse.json();
-                    displayWeatherData(retryData, weatherInfo);
-                    return;
-                }
-            }
-            throw new Error(`Weather service error: ${weatherResponse.status}`);
+            throw new Error(`Weather error: ${weatherResponse.status}`);
         }
 
         const data = await weatherResponse.json();
-        displayWeatherData(data, weatherInfo);
+        displayWeatherAndFood(data, weatherInfo, foodInfo);
 
     } catch (error) {
         console.error('Weather update failed:', error);
@@ -117,13 +105,37 @@ async function updateWeather() {
     }
 }
 
-function displayWeatherData(data, element) {
-    if (!data || !data.main || !data.weather) return;
+function displayWeatherAndFood(data, weatherEl, foodEl) {
     const temp = Math.round(data.main.temp);
-    const desc = data.weather[0].main;
+    const condition = data.weather[0].main; // Clear, Clouds, Rain, Snow, etc.
     const cityName = data.name;
-    element.textContent = `${cityName}: ${temp}°C, ${desc}`;
+    
+    weatherEl.textContent = `${cityName}: ${temp}°C, ${condition}`;
+
+    // Food Recommendation Logic
+    let recommendations = [];
+    const lowerCondition = condition.toLowerCase();
+
+    if (lowerCondition.includes('rain') || lowerCondition.includes('drizzle')) {
+        recommendations = ['파전 & 막걸리 🍶', '따끈한 칼국수 🍜', '얼큰한 짬뽕 🌶️'];
+    } else if (lowerCondition.includes('snow')) {
+        recommendations = ['보글보글 부대찌개 🥘', '따뜻한 우동 🥢', '와플 & 핫초코 ☕'];
+    } else if (lowerCondition.includes('cloud') || lowerCondition.includes('fog') || lowerCondition.includes('mist')) {
+        recommendations = ['든든한 국밥 🍚', '매콤한 떡볶이 🍡', '김치찌개 🥘'];
+    } else if (lowerCondition.includes('clear')) {
+        if (temp > 25) {
+            recommendations = ['시원한 냉면 ❄️', '새콤한 비빔국수 🍝', '아이스 아메리카노 🧊'];
+        } else {
+            recommendations = ['육즙 가득 삼겹살 🥩', '고소한 파스타 🍝', '바삭한 치킨 🍗'];
+        }
+    } else {
+        recommendations = ['맛있는 비빔밥 🥗', '달콤한 갈비 🍖', '간단한 샌드위치 🥪'];
+    }
+
+    const randomMenu = recommendations[Math.floor(Math.random() * recommendations.length)];
+    if (foodEl) {
+        foodEl.textContent = `오늘 저녁은? ${randomMenu}`;
+    }
 }
 
-// Initialize weather update after a short delay to ensure DOM stability
 setTimeout(updateWeather, 500);
