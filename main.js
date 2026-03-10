@@ -50,3 +50,25 @@ function displayNumbers(numbers) {
 
 // Initial generation
 generateLottoNumbers();
+
+// Weather Logic (API key-less)
+async function updateWeather() {
+    const weatherInfo = document.getElementById('weather-info');
+    try {
+        // wttr.in with j1 format returns location and weather in JSON
+        const response = await fetch('https://wttr.in/?format=j1');
+        const data = await response.json();
+        
+        const current = data.current_condition[0];
+        const city = data.nearest_area[0].areaName[0].value;
+        const temp = current.temp_C;
+        const desc = current.weatherDesc[0].value;
+
+        weatherInfo.textContent = `${city}: ${temp}°C, ${desc}`;
+    } catch (error) {
+        weatherInfo.textContent = 'Weather info unavailable';
+        console.error('Weather fetch error:', error);
+    }
+}
+
+updateWeather();

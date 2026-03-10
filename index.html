@@ -17,7 +17,10 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="nav-logo">LottoGen</a>
+            <div class="nav-left">
+                <a href="/" class="nav-logo">LottoGen</a>
+                <span id="weather-info" class="weather-info">Loading...</span>
+            </div>
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#how-to">How it Works</a>
@@ -97,6 +100,9 @@
                 <h2>Partnership & Inquiry</h2>
                 <p>Interested in collaborating or have a question? Send us a message below.</p>
                 <form action="https://formspree.io/f/mnjgngvk" method="POST" class="contact-form">
+                    <!-- Honeypot for spam protection -->
+                    <input type="text" name="_gotcha" style="display:none">
+                    
                     <div class="form-group">
                         <input type="text" name="name" placeholder="Your Name" required title="Please enter your name">
                     </div>
@@ -106,6 +112,11 @@
                     <div class="form-group">
                         <textarea name="message" placeholder="How can we collaborate?" required title="Please enter your message"></textarea>
                     </div>
+
+                    <!-- Turnstile CAPTCHA (Optional but recommended) -->
+                    <!-- To enable, add the script to <head> and your site key here -->
+                    <!-- <div class="cf-turnstile" data-sitekey="your-site-key"></div> -->
+
                     <button type="submit" class="submit-btn">Send Proposal</button>
                 </form>
             </div>
