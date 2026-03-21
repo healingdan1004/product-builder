@@ -160,7 +160,7 @@ function displayForecast(daily, city) {
 
     // Create the header and container first
     weatherCard.innerHTML = `
-        <h2 class="forecast-title">${city} 4일 일기예보 & 추천 메뉴</h2>
+        <h2 class="forecast-title">"${city}" 날씨예보 & 추천매뉴</h2>
         <div class="forecast-container" id="forecast-list"></div>
     `;
 
