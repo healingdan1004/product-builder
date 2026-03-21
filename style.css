@@ -322,20 +322,30 @@ body {
 
 @media (max-width: 768px) {
     .forecast-item {
-        flex: 1 1 100px;
-        max-width: 130px;
-        min-width: 100px;
+        flex: 1 1 calc(50% - 1rem);
+        max-width: calc(50% - 0.5rem);
+        min-width: 130px;
         padding: 0.8rem 0.4rem;
     }
     
     .forecast-title {
-        font-size: 1.1rem;
+        font-size: 1rem;
         text-align: center;
+        margin-bottom: 0.8rem;
     }
     
     .weather-card {
-        padding: 1.2rem 0.8rem;
+        padding: 1rem 0.5rem;
         border-radius: 20px;
+        width: 98%;
+    }
+
+    .forecast-container {
+        gap: 0.5rem;
+    }
+
+    .food-name {
+        font-size: 0.75rem;
     }
 }
 

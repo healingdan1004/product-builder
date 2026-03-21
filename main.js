@@ -140,9 +140,9 @@ async function updateWeather() {
         }
     }
 
-    // Step 2: Fetch 7-Day Forecast from Open-Meteo
+    // Step 2: Fetch 4-Day Forecast from Open-Meteo
     try {
-        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=7`);
+        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=4`);
         if (!res.ok) throw new Error('Forecast API failed');
         const data = await res.json();
         displayForecast(data.daily, city);
@@ -158,29 +158,36 @@ function displayForecast(daily, city) {
 
     const days = ['일', '월', '화', '수', '목', '금', '토'];
 
-    let html = `<h2 class="forecast-title">${city} 7일 일기예보 & 추천 메뉴</h2>`;
-    html += `<div class="forecast-container">`;
+    // Create the header and container first
+    weatherCard.innerHTML = `
+        <h2 class="forecast-title">${city} 4일 일기예보 & 추천 메뉴</h2>
+        <div class="forecast-container" id="forecast-list"></div>
+    `;
+
+    const forecastList = document.getElementById('forecast-list');
+    let forecastHtml = '';
 
     daily.time.forEach((dateStr, i) => {
         const date = new Date(dateStr);
         const dayName = days[date.getDay()];
+        const isToday = i === 0;
+        
         const code = daily.weather_code[i];
         const maxTemp = Math.round(daily.temperature_2m_max[i]);
         const minTemp = Math.round(daily.temperature_2m_min[i]);
         const category = mapWMOCode(code, maxTemp);
         const icon = getWeatherIcon(code);
-        
+
         const recommendations = weatherFoodMap[category] || weatherFoodMap.default;
         const randomMenu = recommendations[Math.floor(Math.random() * recommendations.length)];
 
-        const isToday = i === 0;
-
-        html += `
+        forecastHtml += `
             <div class="forecast-item ${isToday ? 'today' : ''}">
                 <div class="forecast-date">${isToday ? '오늘' : dayName + '요일'}</div>
                 <div class="forecast-icon">${icon}</div>
                 <div class="forecast-temp">
-                    <span class="max">${maxTemp}°</span> / <span class="min">${minTemp}°</span>
+                    <span class="max">${maxTemp}°</span> / 
+                    <span class="min">${minTemp}°</span>
                 </div>
                 <div class="forecast-food">
                     <span class="food-label">추천 메뉴</span>
@@ -190,8 +197,9 @@ function displayForecast(daily, city) {
         `;
     });
 
-    html += `</div>`;
-    weatherCard.innerHTML = html;
+    if (forecastList) { // Ensure forecastList exists before setting innerHTML
+        forecastList.innerHTML = forecastHtml;
+    }
 }
 
 // Initial call
