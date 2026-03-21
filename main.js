@@ -133,7 +133,8 @@ async function updateWeather() {
                 const data = await locRes.json();
                 lat = data.latitude;
                 lon = data.longitude;
-                city = data.city || 'Seoul';
+                // Use a more granular location if available from ipapi.co, otherwise default
+                city = data.suburb || data.city || data.region || '내 주변';
             }
         } catch (ipErr) {
             console.warn('IP fallback failed.');
