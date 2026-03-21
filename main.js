@@ -115,15 +115,16 @@ async function updateWeather() {
 
     let lat = 37.5665, lon = 126.9780, city = 'Seoul'; // Default
 
-    // Step 1: Get Location
+    // Step 1: Get Coordinates
     try {
         if ("geolocation" in navigator) {
             const position = await new Promise((resolve, reject) => {
-                navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 3000 });
+                navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000 });
             });
             lat = position.coords.latitude;
             lon = position.coords.longitude;
-            city = '내 주변'; // Or use reverse geocoding if needed
+        } else {
+            throw new Error('Geolocation not supported');
         }
     } catch (e) {
         console.warn('Geolocation failed, trying IP fallback.');
@@ -133,12 +134,26 @@ async function updateWeather() {
                 const data = await locRes.json();
                 lat = data.latitude;
                 lon = data.longitude;
-                // Use a more granular location if available from ipapi.co, otherwise default
-                city = data.suburb || data.city || data.region || '내 주변';
             }
         } catch (ipErr) {
             console.warn('IP fallback failed.');
         }
+    }
+
+    // Step 1.5: Reverse Geocode to get specific name (Dong/Gu)
+    try {
+        const revRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&addressdetails=1`);
+        if (revRes.ok) {
+            const data = await revRes.json();
+            const addr = data.address;
+            // Prioritize more specific names (Dong -> Gu -> City)
+            city = addr.neighbourhood || addr.suburb || addr.village || addr.town || addr.city || addr.county || '내 주변';
+            
+            // Cleanup: remove common English suffixes if they appear, or format nicely
+            city = city.replace('-si', '시').replace('-gu', '구').replace('-dong', '동');
+        }
+    } catch (revErr) {
+        console.warn('Reverse geocoding failed:', revErr);
     }
 
     // Step 2: Fetch 4-Day Forecast from Open-Meteo
