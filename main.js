@@ -140,17 +140,18 @@ async function updateWeather() {
         }
     }
 
-    // Step 1.5: Reverse Geocode to get specific name (Dong/Gu)
+    // Step 1.5: Reverse Geocode to get specific name (Korean City Name)
     try {
-        const revRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&addressdetails=1`);
+        const revRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&addressdetails=1&accept-language=ko`);
         if (revRes.ok) {
             const data = await revRes.json();
             const addr = data.address;
-            // Prioritize more specific names (Dong -> Gu -> City)
-            city = addr.neighbourhood || addr.suburb || addr.village || addr.town || addr.city || addr.county || '내 주변';
             
-            // Cleanup: remove common English suffixes if they appear, or format nicely
-            city = city.replace('-si', '시').replace('-gu', '구').replace('-dong', '동');
+            // User requested "just the city", so prioritize city/town/village
+            city = addr.city || addr.town || addr.village || addr.suburb || addr.neighbourhood || addr.county || '내 주변';
+            
+            // Final cleanup for better readability
+            city = city.replace('시', '').replace('군', '').trim();
         }
     } catch (revErr) {
         console.warn('Reverse geocoding failed:', revErr);
