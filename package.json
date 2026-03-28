@@ -1,0 +1,18 @@
+{
+  "name": "lottogen",
+  "version": "1.0.0",
+  "description": "Lotto Number Generator with Weather & Blog features",
+  "main": "main.js",
+  "scripts": {
+    "dev": "npx serve . -p 9002",
+    "post": "python scripts/add_post.py",
+    "deploy": "npx wrangler pages deploy . --project-name product-builder"
+  },
+  "keywords": [
+    "lotto",
+    "weather",
+    "blog"
+  ],
+  "author": "LottoGen",
+  "license": "MIT"
+}
