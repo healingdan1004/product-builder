@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - LottoGen</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .post-hero-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        .post-content h2 { margin-top: 2rem; }
+        .post-content p { line-height: 1.8; margin-bottom: 1.2rem; }
+        .post-content ul, .post-content ol { margin-bottom: 1.2rem; padding-left: 1.5rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">LottoGen</a>
+            <a href="/" class="nav-links">홈으로 돌아가기</a>
+        </div>
+    </nav>
+    <div class="container main-content">
+        <article class="card info-card">
+            <!-- Hero Image -->
+            {{image_tag}}
+            
+            <h1>{{title}}</h1>
+            <p class="post-meta">게시일: {{date}} | 작성자: {{author}}</p>
+            
+            <div class="post-content">
+                {{content}}
+            </div>
+        </article>
+    </div>
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2026 LottoGen. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+# Node.js
+node_modules/
+dist/
+build/
+.env
+
+# Antigravity/AI
+.agents/
+.gemini/
+.idx/
+brain/
+implementation_plan.md
+task.md
+walkthrough.md
+*.log
+
+# Python (uv)
+.venv/
+__pycache__/
+*.pyc
+test_input.txt
+
+# OS
+.DS_Store
+Thumbs.db

@@ -21,53 +21,58 @@
                 <a href="/" class="nav-logo">LottoGen</a>
             </div>
             <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#how-to">How it Works</a>
-                <a href="#contact">Contact</a>
+                <a href="#about" data-i18n="nav-about">소개</a>
+                <a href="#how-to" data-i18n="nav-how">사용법</a>
+                <a href="#faq" data-i18n="nav-faq">자주 묻는 질문</a>
+                <a href="#blog" data-i18n="nav-blog">정보 게시판</a>
+                <a href="#contact" data-i18n="nav-contact">문의</a>
             </div>
-            <button id="theme-toggle" class="theme-toggle-inline" aria-label="Toggle Dark/Light Mode">🌙</button>
+            <div class="nav-controls">
+                <button id="lang-toggle" class="lang-toggle" aria-label="Toggle Language">KO/EN</button>
+                <button id="theme-toggle" class="theme-toggle-inline" aria-label="Toggle Dark/Light Mode">🌙</button>
+            </div>
         </div>
     </nav>
 
     <div class="container main-content">
         <header class="hero-section">
-            <h1>Lotto Number Generator</h1>
-            <p class="hero-subtitle">Experience the most advanced and intuitive lucky number generator.</p>
+            <h1 data-i18n="hero-title">로또 번호 생성기</h1>
+            <p class="hero-subtitle" data-i18n="hero-subtitle">가장 진보되고 직관적인 행운의 번호 생성기를 경험해 보세요.</p>
         </header>
 
         <section class="weather-card-section">
             <div class="weather-card">
-                <p>날씨 정보를 불러오는 중...</p>
+                <p data-i18n="weather-loading">날씨 정보를 불러오는 중...</p>
             </div>
         </section>
 
         <div class="interactive-wrapper">
             <section class="generator-section">
                 <div class="card">
-                    <h3>Lucky Numbers</h3>
+                    <h3 data-i18n="gen-title">행운의 번호</h3>
                     <div id="numbers-container" class="numbers-container"></div>
-                    <button id="generate-btn" class="generate-btn">Generate My Numbers</button>
+                    <button id="generate-btn" class="generate-btn" data-i18n="gen-btn">번호 생성하기</button>
                 </div>
             </section>
 
             <section id="game" class="game-section">
                 <div class="card game-card">
-                    <h3>Lotto 2048 Puzzle</h3>
+                    <h3 data-i18n="game-title">로또 2048 퍼즐</h3>
                     <div id="game-container" class="game-container">
                         <canvas id="gameCanvas" width="400" height="400"></canvas>
                         <div id="game-overlay" class="game-overlay">
                             <div id="game-start-screen">
-                                <button id="start-game-btn" class="generate-btn">Start 2048</button>
+                                <button id="start-game-btn" class="generate-btn" data-i18n="game-start">2048 시작하기</button>
                             </div>
                             <div id="game-over-screen" class="hidden">
-                                <h3>Game Over!</h3>
-                                <p>Best Score: <span id="final-score">0</span></p>
-                                <button id="restart-game-btn" class="generate-btn">Try Again</button>
+                                <h3 data-i18n="game-over">게임 종료!</h3>
+                                <p><span data-i18n="game-best">최고 점수</span>: <span id="final-score">0</span></p>
+                                <button id="restart-game-btn" class="generate-btn" data-i18n="game-retry">다시 시도</button>
                             </div>
                         </div>
                     </div>
                     <div class="game-controls">
-                        <p>Use <strong>Arrows</strong> or <strong>Swipe</strong> to merge.</p>
+                        <p data-i18n="game-instructions"><strong>방향키</strong> 또는 <strong>스와이프</strong>로 숫자를 합치세요.</p>
                     </div>
                 </div>
             </section>
@@ -75,54 +80,101 @@
 
         <section id="about" class="info-section">
             <div class="card info-card">
-                <h2>About LottoGen</h2>
-                <p>LottoGen is a premium digital tool designed to help users generate random, unbiased lottery numbers. Our algorithm ensures equal probability for every number, providing a truly random experience for your favorite lottery games.</p>
+                <h2 data-i18n="about-title">LottoGen 소개</h2>
+                <p data-i18n="about-text">LottoGen은 사용자가 무작위적이고 공정한 로또 번호를 생성할 수 있도록 설계된 프리미엄 디지털 도구입니다. 우리의 알고리즘은 모든 번호에 대해 동일한 확률을 보장하여 고객님이 가장 좋아하는 로또 게임에 진정한 무작위 경험을 제공합니다.</p>
+                <p data-i18n="about-text-detail">우리는 기술의 힘을 빌어 단순히 숫자를 뽑는 것을 넘어, 사용자에게 즐거움과 영감을 제공하고자 합니다. 매일 변화하는 날씨 데이터를 분석하여 맞춤형 식단을 추천하고, 간단한 퍼즐 게임을 통해 두뇌를 자극하는 등 전반적인 라이프스타일을 지원하는 엔터테인먼트 플랫폼을 지향합니다.</p>
             </div>
         </section>
 
         <section id="how-to" class="info-section">
             <div class="card info-card">
-                <h2>How to Use</h2>
+                <h2 data-i18n="how-title">사용 방법</h2>
                 <div class="steps-grid">
                     <div class="step">
                         <span class="step-num">1</span>
-                        <p>Click the "Generate My Numbers" button.</p>
+                        <h4 data-i18n="how-step1-title">번호 생성</h4>
+                        <p data-i18n="how-step1">"번호 생성하기" 버튼을 클릭합니다. 시스템은 최신 난수 발생 알고리즘을 사용하여 즉시 번호를 추출합니다.</p>
                     </div>
                     <div class="step">
                         <span class="step-num">2</span>
-                        <p>Watch our algorithm select 6 unique numbers.</p>
+                        <h4 data-i18n="how-step2-title">결과 확인</h4>
+                        <p data-i18n="how-step2">알고리즘이 1부터 45 사이의 6개 고유한 번호를 선택하는 것을 확인합니다. 중복은 발생하지 않습니다.</p>
                     </div>
                     <div class="step">
                         <span class="step-num">3</span>
-                        <p>Use these lucky numbers for your next ticket!</p>
+                        <h4 data-i18n="how-step3-title">저장 및 공유</h4>
+                        <p data-i18n="how-step3">이 행운의 번호를 다음 로또 구매에 사용해 보세요! 친구들과 번호를 공유하거나 게임을 즐기며 즐거운 시간을 보내세요.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="info-section">
+            <div class="card info-card">
+                <h2 data-i18n="faq-title">자주 묻는 질문 (FAQ)</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4 data-i18n="faq-q1">Q: 생성된 번호로 정말 당첨될 수 있나요?</h4>
+                        <p data-i18n="faq-a1">A: 보장할 수는 없지만, 저희 알고리즘은 실제 로또 추첨기와 유사한 확률적 무작위성을 따릅니다. 행운이 함께하기를 바랍니다!</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4 data-i18n="faq-q2">Q: 날씨 정보는 어디서 가져오나요?</h4>
+                        <p data-i18n="faq-a2">A: 신뢰할 수 있는 글로벌 기상 API를 통해 사용자의 현재 위치 또는 주요 도시의 실시간 정보를 데이터 기반으로 분석합니다.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4 data-i18n="faq-q3">Q: 음식 추천 기준이 무엇인가요?</h4>
+                        <p data-i18n="faq-a3">A: 기온, 강수량, 습도 등 기상 조건에 따른 인간의 심리적, 생리적 반응을 고려한 매칭 시스템을 사용합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="info-section">
+            <div class="card info-card">
+                <h2 data-i18n="blog-title">유용한 정보</h2>
+                <div class="blog-grid">
+                    <article class="blog-preview">
+                        <h4 data-i18n="blog-lotto-habits-title">행운을 부르는 로또 습관</h4>
+                        <p data-i18n="blog-lotto-habits-excerpt">로또 당첨을 위해 우리가 실천할 수 있는 작은 습관들을 소개합니다.</p>
+                        <a href="blog/lotto-habits.html" class="read-more" data-i18n="blog-read-more">더 읽어보기</a>
+                    </article>
+                    <article class="blog-preview">
+                        <h4 data-i18n="blog-post1-title">로또 당첨 확률을 높이는 전략이 있을까?</h4>
+                        <p data-i18n="blog-post1-excerpt">많은 사람들이 패턴이나 통계를 연구하지만, 진정한 전략은 확률을 이해하는 것에서 시작됩니다...</p>
+                        <a href="blog/lotto-tips.html" class="read-more" data-i18n="blog-read-more">더 읽어보기</a>
+                    </article>
+                    <article class="blog-preview">
+                        <h4 data-i18n="blog-post2-title">비 오는 날 유독 파전이 생각나는 과학적 이유</h4>
+                        <p data-i18n="blog-post2-excerpt">소리와 냄새가 우리 뇌의 기억 중추를 자극하여 특정 음식을 갈망하게 만드는 원리를 분석합니다...</p>
+                        <a href="blog/weather-food.html" class="read-more" data-i18n="blog-read-more">더 읽어보기</a>
+                    </article>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="partnership-section">
             <div class="card partnership-card">
-                <h2>Partnership & Inquiry</h2>
-                <p>Interested in collaborating or have a question? Send us a message below.</p>
+                <h2 data-i18n="contact-title">파트너십 및 문의</h2>
+                <p data-i18n="contact-subtitle">협업에 관심이 있거나 질문이 있으신가요? 아래 폼을 통해 메시지를 보내주세요.</p>
                 <form action="https://formspree.io/f/mnjgngvk" method="POST" class="contact-form">
                     <!-- Honeypot for spam protection -->
                     <input type="text" name="_gotcha" style="display:none">
                     
                     <div class="form-group">
-                        <input type="text" name="name" placeholder="Your Name" required title="Please enter your name">
+                        <input type="text" name="name" placeholder="성함" required data-i18n-placeholder="contact-name">
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" placeholder="Your Email" required title="Please enter a valid email address">
+                        <input type="email" name="email" placeholder="이메일" required data-i18n-placeholder="contact-email">
                     </div>
                     <div class="form-group">
-                        <textarea name="message" placeholder="How can we collaborate?" required title="Please enter your message"></textarea>
+                        <textarea name="message" placeholder="어떤 협업을 원하시나요?" required data-i18n-placeholder="contact-msg"></textarea>
                     </div>
 
                     <!-- Turnstile CAPTCHA (Optional but recommended) -->
                     <!-- To enable, add the script to <head> and your site key here -->
                     <!-- <div class="cf-turnstile" data-sitekey="your-site-key"></div> -->
 
-                    <button type="submit" class="submit-btn">Send Proposal</button>
+                    <button type="submit" class="submit-btn" data-i18n="contact-btn">문의 보내기</button>
                 </form>
             </div>
         </section>

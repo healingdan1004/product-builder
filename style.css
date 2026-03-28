@@ -166,6 +166,36 @@ body {
     border-radius: 10px;
 }
 
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.theme-toggle-inline, .lang-toggle {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 0.8rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.theme-toggle-inline:hover, .lang-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+[data-theme="dark"] .theme-toggle-inline, 
+[data-theme="dark"] .lang-toggle {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
 .forecast-item {
     flex: 1 1 120px;
     max-width: 140px;
@@ -459,6 +489,18 @@ body {
     .card {
         padding: 1.5rem;
     }
+    .nav-container {
+        padding: 0 1rem;
+    }
+
+    .nav-controls {
+        gap: 0.5rem;
+    }
+
+    .lang-toggle, .theme-toggle-inline {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
     
     .hero-section h1 {
         font-size: 2rem;
@@ -651,7 +693,104 @@ body {
     opacity: 1;
 }
 
-/* Ball Colors */
+/* FAQ Section */
+.faq-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.faq-item {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+[data-theme="dark"] .faq-item {
+    border-bottom-color: rgba(255,255,255,0.05);
+}
+
+.faq-item h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--button-bg-color);
+}
+
+.faq-item p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--secondary-text-color);
+}
+
+/* Blog Section */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.blog-preview {
+    background: rgba(0,0,0,0.02);
+    padding: 1.5rem;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .blog-preview {
+    background: rgba(255,255,255,0.03);
+}
+
+.blog-preview:hover {
+    background: rgba(0,0,0,0.04);
+    transform: translateY(-3px);
+}
+
+.blog-preview h4 {
+    margin: 0 0 1rem 0;
+}
+
+.blog-preview p {
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 1.5rem;
+}
+
+.read-more {
+    display: inline-block;
+    color: var(--button-bg-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+/* Post Meta (for blog pages) */
+.post-meta {
+    font-size: 0.85rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 2rem;
+}
+
+.info-card section {
+    margin-bottom: 2.5rem;
+}
+
+.info-card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+/* responsive refinements */
+@media (max-width: 600px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Ball Colors (Restored) */
 .color-1 { background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); }
 .color-2 { background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%); }
 .color-3 { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
