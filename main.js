@@ -6,7 +6,8 @@ const langToggle = document.getElementById('lang-toggle');
 // Translation Dictionary
 const translations = {
     ko: {
-        'blog-energy-geopolitics-title': '지정학과 에너지: 보이지 않는 흐름', 'blog-energy-geopolitics-excerpt': '우리의 일상을 움직이는 거대한 에너지의 지정학적 흐름과 동양 철학적 고찰을 다룹니다.',
+        'blog-iran-energy-title': '지정학과 에너지: 이란 사태와 위기', 'blog-iran-energy-excerpt': '최근 이란 분쟁과 호르무즈 해협이 세계 에너지 시장에 미치는 영향을 분석합니다.',
+        'blog-buddhist-emptiness-title': "동양 철학: 불교의 '공(空)' 사상", 'blog-buddhist-emptiness-excerpt': "모든 존재의 상호의존성과 '비어 있음'이 지닌 진정한 의미를 탐구합니다.",
         'blog-lotto-habits-title': '행운을 부르는 로또 습관', 'blog-lotto-habits-excerpt': '로또 당첨을 위해 우리가 실천할 수 있는 작은 습관들을 소개합니다.',
         'nav-about': '소개', 'nav-how': '사용법', 'nav-contact': '문의', 'nav-faq': 'FAQ', 'nav-blog': '게시판',
         'hero-title': '로또 번호 생성기', 'hero-subtitle': '가장 진보되고 직관적인 행운의 번호 생성기를 경험해 보세요.',
@@ -31,7 +32,8 @@ const translations = {
         'weather-loading': '실시간 기상 정보를 분석하여 맞춤 추천 메뉴를 생성하고 있습니다...', 'weather-error': '날씨 정보를 가져올 수 없습니다.'
     },
     en: {
-        'blog-energy-geopolitics-title': 'Geopolitics & Energy: Silent Flows', 'blog-energy-geopolitics-excerpt': 'Explore the geopolitical shifts of energy and insights from Eastern philosophy.',
+        'blog-iran-energy-title': 'Geopolitics & Energy: Iran Conflict', 'blog-iran-energy-excerpt': 'Analysis of how the recent Iran tensions impact global energy security.',
+        'blog-buddhist-emptiness-title': "Eastern Philosophy: Buddhist 'Emptiness'", 'blog-buddhist-emptiness-excerpt': 'Exploring interconnection and the true meaning of Sunyata.',
         'blog-lotto-habits-title': 'Lucky Lotto Habits', 'blog-lotto-habits-excerpt': 'Simple habits to bring more luck into your lottery games.',
         'nav-about': 'About', 'nav-how': 'How it Works', 'nav-contact': 'Contact', 'nav-faq': 'FAQ', 'nav-blog': 'Blog',
         'hero-title': 'Lotto Number Generator', 'hero-subtitle': 'Experience the most advanced and intuitive lucky number generator.',
