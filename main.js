@@ -7,7 +7,6 @@ const langToggle = document.getElementById('lang-toggle');
 const translations = {
     ko: {
         'blog-lotto-habits-title': '행운을 부르는 로또 습관', 'blog-lotto-habits-excerpt': '로또 당첨을 위해 우리가 실천할 수 있는 작은 습관들을 소개합니다.',
-        'blog-lotto-habits-title': '??? ??? ?? ??', 'blog-lotto-habits-excerpt': '?? ??? ?? ??? ??? ? ?? ?? ???? ?????.',
         'nav-about': '소개', 'nav-how': '사용법', 'nav-contact': '문의', 'nav-faq': 'FAQ', 'nav-blog': '게시판',
         'hero-title': '로또 번호 생성기', 'hero-subtitle': '가장 진보되고 직관적인 행운의 번호 생성기를 경험해 보세요.',
         'gen-title': '행운의 번호', 'gen-btn': '번호 생성하기',
@@ -31,7 +30,6 @@ const translations = {
         'weather-loading': '실시간 기상 정보를 분석하여 맞춤 추천 메뉴를 생성하고 있습니다...', 'weather-error': '날씨 정보를 가져올 수 없습니다.'
     },
     en: {
-        'blog-lotto-habits-title': 'Lucky Lotto Habits', 'blog-lotto-habits-excerpt': 'Simple habits to bring more luck into your lottery games.',
         'blog-lotto-habits-title': 'Lucky Lotto Habits', 'blog-lotto-habits-excerpt': 'Simple habits to bring more luck into your lottery games.',
         'nav-about': 'About', 'nav-how': 'How it Works', 'nav-contact': 'Contact', 'nav-faq': 'FAQ', 'nav-blog': 'Blog',
         'hero-title': 'Lotto Number Generator', 'hero-subtitle': 'Experience the most advanced and intuitive lucky number generator.',
